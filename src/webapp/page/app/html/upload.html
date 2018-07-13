@@ -1,0 +1,69 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">只支持.pdf文件</h3>
+	</div>
+	<div class="panel-body">
+		<input type="file" file-model="myFile">
+		<button type="button" class="btn btn-primary" ng-click="save()">上传识别</button>
+
+		<div ng-show="canDownload">
+			<h2>	上传成功，可以核对上传文件<a href="" ng-click="downloadServerDetailList()">{{fileName}}</a> </h2>
+		</div>
+
+		<div ng-show="errorMessge" class="alert alert-danger">
+			{{message}}
+		</div>
+
+		<br>
+		<br>
+		<br>
+		
+		<table class="table table-hover">
+			<tbody>  
+            <tr>  
+                <th>文件描述</th>  
+                <th>上传时间</th>  
+            </tr>  
+			<tr ng-repeat="x in tablequeryTraingFiles">
+				<td ng-click="showTableInformation(x.traing_file_path)"><a href>{{x.traing_file_path}}</a></td>  
+				<td>{{ x.operate_time }}</td>
+			</tr>
+			</tbody>
+		</table>
+
+		
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+
+	</div>
+	
+	
+	
+	<script type="text/ng-template" id="newFunctionReminder.html">  
+        <div class="modal-header update-modal-title">  
+        </div>  
+        <table class="table table-hover">  
+        <tbody>  
+            <tr>  
+                <th>AMOUNT</th>  
+                <th>CC</th>  
+            </tr>  
+            <tr ng-repeat="dbinfo in tableInfomatin">  
+                <td>{{dbinfo.num1}}</td>  
+                <td>{{dbinfo.num2}}</td>  
+            </tr>  
+        </tbody>  
+       </table>  
+        <div class="modal-footer update-modal-footer">  
+            <button class="btn" ng-click="cancel()">关闭</button>  
+        </div>  
+</script>  
+	
+	
+</div>

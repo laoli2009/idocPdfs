@@ -1,0 +1,227 @@
+﻿<html ng-app="idocpdfs.controller">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../page/common/css/jquery.treeview.css" type="text/css" />
+    <link rel='stylesheet prefetch' href='../../../page/common/css/font-awesome.css'>
+    <link rel="stylesheet" href="../../../page/common/css/page.css">
+    <link rel="stylesheet" href="../../../page/common/css/pingpang.css">
+    <link rel="stylesheet" href="../../../page/common/css/normalize.css" />
+    <link rel="stylesheet" href="../../../page/common/css/searchbutton.css">
+    <link rel="stylesheet" href="../../../page/common/css/bootstrap3.min.css">
+    <link rel="stylesheet" href="../../../page/common/css/pagination.css">
+    <link rel="stylesheet" href="../../../page/common/css/loading.css">
+
+
+    <script src="../../../page/common/js/jquery-3.1.1.min.js"></script>
+    <script src="../../../page/common/js/jquery.treeview.js"></script>
+    <script src="../../../page/common/js/angular.js"></script>
+    <script src="../../../page/common/js/jquery.pagination.js"></script>
+    <script src="../../../page/app/js/idocpdfs-controller.js"></script>
+    <script src="../../../page/app/js/idocpdfs-api.js"></script>
+
+
+</head>
+
+<body ng-controller="idocpdfsCtrl">
+    <div class="ct" id="t1">
+        <div class="ct" id="t2">
+            <div class="ct" id="t3">
+                <ul id="menu" class="ul-1">
+                    <a href="#t1">
+                        <li class="icon fa " id="uno">最新更新</li>
+                    </a>
+                    <a href="#t2">
+                        <li class="icon fa " id="dos">文件管理</li>
+                    </a>
+                    <a href="#t3">
+                        <li class="icon fa " id="tres">报表管理</li>
+                    </a>
+                </ul>
+                <div class="page" id="p1">
+
+                    <div id="pingpong">
+                        <div id="table">
+                            <div id="line"></div>
+                            <div id="net-top"></div>
+                            <div id="net-middle"></div>
+                            <div id="net-bottom"></div>
+                            <div id="net-shadow"></div>
+                        </div>
+
+                        <div id="c1">
+                            <div id="b1"></div>
+                        </div>
+                        <div id="c2">
+                            <div id="b2"></div>
+                        </div>
+                        <div id="c3">
+                            <div id="b3"></div>
+                        </div>
+                        <div id="c4">
+                            <div id="b4"></div>
+                        </div>
+                        <span id="ping" style=" font-family: 'Chewy', cursive;text-align: center;font-size: 50px;color: white;overflow: hidden;">IDOC</span>
+                        <span id="pong" style=" font-family: 'Chewy', cursive;text-align: center;font-size: 50px;color: white;overflow: hidden;">自动结算</span> 最新解析了2017年12月的数据
+                    </div>
+
+                </div>
+
+
+                <div class="page" id="p2">
+                    <div>
+                        <div class="col-xs-2">
+                            <ul id="treeview" class="filetree">
+                                <li ng-repeat="yearinfo in file_infos ">
+                                    <span class="folder"><font color="#000000">{{yearinfo.year}}</font></span>
+                                    <ul ng-repeat="monthinfo in yearinfo.months">
+                                        <li>
+                                            <a ng-click="gao(yearinfo.year ,monthinfo.month , monthinfo.fileName)">
+                                                <span class="folder">{{monthinfo.month}}</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="search d1" style="height:100px">
+                                <form>
+                                    <input type="text" placeholder="搜索模糊文件名" ng-model="likeFileName">
+                                    <button type="submit" ng-click="likeSearch(likeFileName)"></button>
+                                </form>
+                            </div>
+                            <div class="panel panel-default" style="height:550px">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">{{select_year}}年{{select_month}}月查询文件：</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        </thead>
+                                        <tbody style="display:block; max-height:500px;overflow-y: scroll;">
+                                            <tr ng-repeat="fileName in search_fileNames">
+                                                <td><a href="" ng-click="downloadFileByName(select_year,select_month,fileName)">{{fileName}}</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-xs-4">
+                            <iframe frameborder="0" scrolling="no" src="blue.html" height="650px" width="100%"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="page" id="p3">
+
+                    <div class="col-xs-8">
+                        <div class="centermain" ng-show="showloading">
+                            <div class="loader" ng-show="showloading">
+                                <svg version="1.1" id="loader-1" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                                                <path fill="#000" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+                                                  <animateTransform attributeType="xml"
+                                                    attributeName="transform"
+                                                    type="rotate"
+                                                    from="0 25 25"
+                                                    to="360 25 25"
+                                                    dur="0.8s"
+                                                    repeatCount="indefinite"/>
+                                                  </path>
+                                                </svg>
+                            </div>
+                        </div>
+
+
+                        <div class="panel panel-default" style="height:650px" ng-show="panelrmcc">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">查询结果：</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div style="height:500px; overlow:auto;">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th> 文件名称
+                                                </th>
+                                                <th> 账单带期
+                                                </th>
+                                                <th> 国家
+                                                </th>
+                                                <th> 城市
+                                                </th>
+                                                <th> 币种
+                                                </th>
+                                                <th> Remittance
+                                                </th>
+                                                <th> CreditCard
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="responseBean in responseBeans">
+                                                <td><a href="" ng-click="downloadFileByresponseBean(responseBean)">{{responseBean.name}}</a>
+                                                </td>
+                                                <td>{{responseBean.fileDate}}
+                                                </td>
+                                                <td>{{responseBean.country}}
+                                                </td>
+                                                <td>{{responseBean.city}}
+                                                </td>
+                                                <td>{{responseBean.currency}}
+                                                </td>
+                                                <td>{{responseBean.rm}}
+                                                </td>
+                                                <td>{{responseBean.cc}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="searchnew dnew" style="margin-top: 50px">
+                                    <div align="center">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
+                                        <button type="button" ng-click="nextSearchRmCC(-1)">上一页 </button>
+                                        <font size="3">第{{pageNow}}({{maxPage}})页</font>
+                                        <button type="button" ng-click="nextSearchRmCC(1)">下一页</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-xs-4">
+                        <div class="searchnew dnew" style="height:200px">
+
+                            <div>
+                                &nbsp;起始：<input type="date" ng-model="fromDate" />
+                            </div>
+                            <div>
+                                &nbsp;截止：<input type="date" ng-model="toDate" />
+                            </div>
+                            <div>
+                                &nbsp;条件：<select ng-model="desc" ng-options="operation.desc for operation in preNameOperation"></select>
+                            </div>
+
+                            <div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
+                                <button type="button" ng-click="searchRmCC()">查询</button>&nbsp;&nbsp;<button type="button" ng-click="makeResponseBeanFile()">下载</button>
+                            </div>
+                        </div>
+                        <iframe frameborder="0" scrolling="no" src="blue.html" height="450px" width="100%"></iframe>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+</body>
+
+</html>

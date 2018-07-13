@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html  ng-app="user.controller">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+	<title>iDoc自动结算</title>
+	<link rel="stylesheet" type="text/css" href="page/common/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="page/common/css/login.css" >
+</head>
+
+<body ng-controller="userCtrl"> 
+	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+		aria-labelledby="mySmallModalLabel" aria-hidden="false"
+		style="display: none;">
+		<div style="display: table; width: 100%; height: 100%;">
+			<div style="vertical-align: middle; display: table-cell;">
+				<div class="modal-dialog modal-sm" style="width: 540px;">
+					<div class="modal-content" style="border: none;">
+						<div class="col-left"></div>
+						<div class="col-right">
+							<div class="modal-header">
+								<h4 class="modal-title" id="loginModalLabel"
+									style="font-size: 18px;">登录</h4>
+							</div>
+							<br />
+							<div class="modal-body">
+								<section class="box-login v5-input-txt" id="box-login">
+									<form id="login_form" action="" method="post"
+										autocomplete="off">
+										<ul>
+											<li class="form-group required"><input class="form-control"
+												id="id_account_l" maxlength="50" name="account_l"
+												placeholder="请输入东航员工号" type="text" ng-model="user.userName"></li>
+											<li class="form-group required"><input class="form-control"
+												id="id_password_l" name="password_l" placeholder="请输入密码"
+												type="password" ng-model="user.password"></li>
+										</ul>
+									</form>
+									<br />
+									<div class="login-box marginB10">  
+										<button id="login_btn" type="button"
+											class="btn btn-micv5 btn-block globalLogin"  ng-click="login(user)">确定</button>
+										<div id="login-form-tips" class="tips-error bg-danger" ng-show="loginFailed">错误提示</div>
+										<br>
+										<p class="text-danger" ng-show="loginFailed">登录失败！</p>   
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+			<script src="page/common/js/angular.js"></script> 
+			<script type="text/javascript" src="page/common/js/jquery2.2.2.min.js"></script>
+			<script type="text/javascript" src="page/common/js/bootstrap.min.js"></script> 
+			<script type="text/javascript" src="page/app/js/user-controller.js"></script>	
+		    <div style="text-align: center;"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

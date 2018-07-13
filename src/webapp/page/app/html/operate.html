@@ -1,0 +1,35 @@
+<form role="form">
+	
+	<div class="form-group">
+		<label for="name">sepal length in cm</label>
+		<input type="text" class="form-control" id="name" ng-model="sample.val1"
+			   placeholder="请输入sepal length in cm">
+	</div>
+	
+	<div class="form-group">
+		<label for="name">sepal width in cm</label>
+		<input type="text" class="form-control" id="name" ng-model="sample.val2"
+			   placeholder="请输入sepal width in cm">
+	</div>
+	
+	<div class="form-group">
+		<label for="name">petal length in cm</label>
+		<input type="text" class="form-control" id="name" ng-model="sample.val3"
+			   placeholder="请输入petal length in cm">
+	</div>
+	
+	<div class="form-group">
+		<label for="name">petal width in cm</label>
+		<input type="text" class="form-control" id="name" ng-model="sample.val4"
+			   placeholder="请输入petal width in cm">
+	</div>
+	
+	
+	<div class="alert alert-danger" ng-show="messge" >
+		  预测结果：{{predictLable}}  
+	</div>
+	
+	<button   class="btn btn-default"  ng-click="predict(sample)"> 预测  </button>
+	
+</form>
+
